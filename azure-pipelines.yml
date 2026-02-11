@@ -1,34 +1,40 @@
 trigger:
-- master
+  - master
+
 pool:
   vmImage: ubuntu-latest
+
 stages:
-- stage: TerraformValidate
-  jobs:
-    - job: TerraformValidateJob
-      continueOnError: false
-      steps:
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/dev'
-        artifact: 'tet-svk'
-        publishLocation: 'pipeline'
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: 'latest'
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
-        backendServiceArm: 'FreeSubscription(743d926c-caad-42c5-b316-2083b0e69991)'
-        backendAzureRmResourceGroupName: 'MS'
-        backendAzureRmStorageAccountName: 'terrafromsatestorage'
-        backendAzureRmContainerName: 'test'
-        backendAzureRmKey: 'vm.tfstate'
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'validate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+  - stage: TerraformValidate
+    jobs:
+      - job: TerraformValidateJob
+        continueOnError: false
+        steps:
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(System.DefaultWorkingDirectory)/dev'
+              artifact: 'tet-svk'
+              publishLocation: 'pipeline'
+
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+              backendServiceArm: 'FreeSubscription(743d926c-caad-42c5-b316-2083b0e69991)'
+              backendAzureRmResourceGroupName: 'MS'
+              backendAzureRmStorageAccountName: 'terrafromsatestorage'
+              backendAzureRmContainerName: 'test'
+              backendAzureRmKey: 'vm.tfstate'
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+
 
