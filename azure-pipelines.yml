@@ -39,5 +39,7 @@ stages:
           - task: DownloadSecureFile@1
             inputs:
               secureFile: 'id_rsa.pub'
-
+          - script: |
+              cp $(downloadSSH.secureFilePath) $(System.DefaultWorkingDirectory)/dev/id_rsa.pub
+            displayName: Copy SSH Key
 
