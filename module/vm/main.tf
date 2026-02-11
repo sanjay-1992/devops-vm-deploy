@@ -46,7 +46,7 @@ resource azurerm_linux_virtual_machine "test" {
   admin_password = "et5e@wtteasgagas"
   admin_ssh_key {
     username = "cloudadmin"
-    public_key = file(var.admin_ssh_key)
+    public_key = file("${path.module}/id_rsa.pub")
     }
   source_image_reference {
     publisher = "canonical"
