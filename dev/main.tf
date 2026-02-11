@@ -6,4 +6,5 @@ module "vm-t" {
   address_space = var.address_space
   subnets       = var.subnets
   vm_sizes      = var.vm_sizes
+  ssh_public_key = var.ssh_public_key
 }
