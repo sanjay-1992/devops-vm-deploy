@@ -40,6 +40,8 @@ stages:
             inputs:
               secureFile: 'id_rsa.pub'
           - script: |
-              echo "##vso[task.setvariable variable=TF_VAR_ssh_public_key]$(cat $DOWNLOADSSH_SECUREFILEPATH)"
+              echo "Reading SSH key..."
+              SSH_KEY=$(cat $DOWNLOADSSH_SECUREFILEPATH)
+              echo "##vso[task.setvariable variable=TF_VAR_ssh_public_key]$SSH_KEY"
+              echo "SSH key variable set successfully"
             displayName: Set SSH Key Variable
-
