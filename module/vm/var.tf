@@ -22,3 +22,5 @@ variable vm_sizes {
   description = "virtual machine size"
   type = map(string)
 }
+variable admin_ssh_key {
+  }
