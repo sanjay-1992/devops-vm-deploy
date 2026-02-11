@@ -36,5 +36,8 @@ stages:
               provider: 'azurerm'
               command: 'validate'
               workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: 'id_rsa.pub'
 
 
