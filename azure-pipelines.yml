@@ -48,5 +48,6 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'apply'
+              commandOptions: '-auto-approve'
               workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
               environmentServiceNameAzureRM: 'FreeSubscription(743d926c-caad-42c5-b316-2083b0e69991)'
